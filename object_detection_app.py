@@ -11,6 +11,9 @@ from multiprocessing import Queue, Pool
 from object_detection.utils import label_map_util
 from object_detection.utils import visualization_utils as vis_util
 
+
+#tensorboard log directory
+LOGDIR = "tensorboard-log/" 
 CWD_PATH = os.getcwd()
 
 # Path to frozen detection graph. This is the actual model that is used for the object detection.
@@ -71,6 +74,8 @@ def worker(input_q, output_q):
             tf.import_graph_def(od_graph_def, name='')
 
         sess = tf.Session(graph=detection_graph)
+#Adding Graph to Visualization
+    writer = tf.summary.FileWriter("tensorboard-log/",sess.graph)
 
     fps = FPS().start()
     while True:
@@ -129,3 +134,5 @@ if __name__ == '__main__':
     pool.terminate()
     video_capture.stop()
     cv2.destroyAllWindows()
+    print('Done training!')
+    print('Run `tensorboard --logdir=%s` to see the results.' % LOGDIR)
