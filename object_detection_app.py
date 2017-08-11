@@ -13,7 +13,7 @@ from object_detection.utils import visualization_utils as vis_util
 
 
 #tensorboard log directory
-LOGDIR = "tensorboard-log/" 
+LOGDIR = "tensorboard-log/"
 CWD_PATH = os.getcwd()
 
 # Path to frozen detection graph. This is the actual model that is used for the object detection.
